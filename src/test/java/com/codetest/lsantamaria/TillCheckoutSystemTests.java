@@ -4,23 +4,32 @@ import static org.junit.Assert.assertEquals;
 
 import com.codetest.lsantamaria.model.Sum;
 import com.codetest.lsantamaria.repository.ProductRepository;
+import com.codetest.lsantamaria.service.OfferService;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * Unit tests of {@link TillCheckoutSystem}.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TillCheckoutSystemTests {
 
   private ProductRepository productRepository = new InMemoryProductRepositoryMock();
+
+  //Using Mockito to show another way of Mocking
+  @Mock
+  private OfferService offerService;
   private TillCheckoutSystem tillCheckoutSystem;
 
   @Before
   public void setUp() {
-    tillCheckoutSystem = new TillCheckoutSystem(productRepository);
+    tillCheckoutSystem = new TillCheckoutSystem(productRepository, offerService);
   }
 
   @Test
